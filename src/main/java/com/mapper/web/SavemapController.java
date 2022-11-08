@@ -25,7 +25,7 @@ public class SavemapController {
         ResponseEntity status;
 
         try {
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306?user=root&password=MegaPuuk");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306?user=root&password=password");
             System.out.println("Successfully connected");
         } catch(SQLException e) {
             e.printStackTrace();
