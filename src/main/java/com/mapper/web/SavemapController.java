@@ -9,16 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 @Controller
 public class SavemapController {
     private final String MAPS_DIR = "src/main/resources/static/maps/";
-
-//    @GetMapping("/")
-//    public String greeting(@RequestParam(name="", required=false, defaultValue="World") String name, Model model) {
-//        model.addAttribute("name", name);
-//        return "greeting";
-//    }
 
     @RequestMapping(value = "/savemap", method = RequestMethod.POST)
     @ResponseBody
@@ -26,13 +23,21 @@ public class SavemapController {
         System.out.println("POSTING");
         System.out.println(input.toString());
         ResponseEntity status;
+
         try {
-            File file = new File(input.name + ".json");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306?user=root&password=password");
+            System.out.println("Successfully connected");
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            File file = new File(MAPS_DIR + input.name + ".json");
             FileWriter writer = new FileWriter(file);
 
-            writer.close();
             writer.write(input.toString());
 
+            writer.close();
             status = new ResponseEntity(HttpStatus.ACCEPTED);
         } catch(Exception e) {
             e.printStackTrace();

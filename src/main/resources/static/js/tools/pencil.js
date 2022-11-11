@@ -45,9 +45,12 @@ let pencil = {
     //methods
     addPoint: function (ev) {
         let brush = map.toolData.brushes[tool.brush.selBrush];
+
+        let x = (this.pointer.x - map.x) / (map.scale);
+        let y = (this.pointer.y - map.y) / (map.scale);
     
-        brush.points.x[brush.points.x.length - 1].push((this.pointer.x - map.x) / (map.scale * map.image.baseWidth));
-        brush.points.y[brush.points.y.length - 1].push((this.pointer.y - map.y) / (map.scale * map.image.baseHeight));
+        brush.points.x[brush.points.x.length - 1].push(x);
+        brush.points.y[brush.points.y.length - 1].push(y);
 
         window.requestAnimationFrame(update);
     },
@@ -63,7 +66,7 @@ let pencil = {
         tool.toolActive = false;
 
         //TODO: consider this
-        //remove some points
+        //optimize points
         // let points = map.toolData.brushes[tool.brush.selBrush].points;
 
         // if(points.x[points.x.length - 1].length > 150) {

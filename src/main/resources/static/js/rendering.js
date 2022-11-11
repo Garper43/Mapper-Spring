@@ -57,20 +57,21 @@ function drawBrushes() {
         ctx.fillStyle = brush.color;
         ctx.strokeStyle = brush.color;
         ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
 
         for( b in brush.points.x ) { //loop through strokes
             //draw lines
             ctx.lineWidth = brush.thickness * map.scale;
             ctx.beginPath();
 
-            let x = brush.points.x[b][0] * (map.scale * map.image.baseWidth) + map.x;
-            let y = brush.points.y[b][0] * (map.scale * map.image.baseHeight) + map.y;
+            let x = brush.points.x[b][0] * (map.scale) + map.x;
+            let y = brush.points.y[b][0] * (map.scale) + map.y;
 
             ctx.moveTo(~~x, ~~y);
 
             for( c in brush.points.x[b] ) { //loop through points
-                x = brush.points.x[b][c] * (map.scale * map.image.baseWidth) + map.x;
-                y = brush.points.y[b][c] * (map.scale * map.image.baseHeight) + map.y;
+                x = brush.points.x[b][c] * (map.scale) + map.x;
+                y = brush.points.y[b][c] * (map.scale) + map.y;
 
                 ctx.lineTo(~~x, ~~y);
             }
@@ -102,23 +103,29 @@ function drawWaypoints() {
     let x;
     let y;
 
+    //draw icon
     for( i = 0 ; i < map.toolData.waypoints.length ; i++ ) {
-        x = map.toolData.waypoints[i].x * (map.scale * map.image.baseWidth) + map.x;
-        y = map.toolData.waypoints[i].y * (map.scale * map.image.baseHeight) + map.y;
+        x = map.toolData.waypoints[i].x * (map.scale) + map.x;
+        y = map.toolData.waypoints[i].y * (map.scale) + map.y;
 
         ctx.drawImage(tool.waypoint.icon, x - 10, y - 20, 20, 20);
     }
 
+    //draw text
     if(map.scale >= 1) {
-        ctx.fillStyle = "black";
+        ctx.fillStyle = "white";
         ctx.font = "20px sans-serif";
+        ctx.shadowColor = "black";
+        ctx.shadowBlur = 7;
 
         for( i = 0 ; i < map.toolData.waypoints.length ; i++ ) {
-            x = map.toolData.waypoints[i].x * (map.scale * map.image.baseWidth) + map.x;
-            y = map.toolData.waypoints[i].y * (map.scale * map.image.baseHeight) + map.y;
+            x = map.toolData.waypoints[i].x * (map.scale) + map.x;
+            y = map.toolData.waypoints[i].y * (map.scale) + map.y;
 
             ctx.fillText(map.toolData.waypoints[i].name, x + 10, y);
-        }    
+        }  
+
+        ctx.shadowBlur = 0;
     }
     
 }
