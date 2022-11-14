@@ -2,7 +2,7 @@ var map = {
     image: {
         file: new Image(),
         //TODO: this is a bit redundant, try to get rid of it later
-        src: "assets/64x64.png",
+        src: "assets/empty.svg",
 
         //these dimentions are placeholders and will be replaced in image.file.onload()
         //they are used for calculating displayed image size
@@ -105,3 +105,5 @@ var map = {
         },
     }
 }
+
+map.utils.loadMap(0);
