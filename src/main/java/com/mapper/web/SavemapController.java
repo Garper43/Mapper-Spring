@@ -34,7 +34,7 @@ public class SavemapController {
             Statement statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.name + "', 'Garper_', '', " + rand.nextInt(1000) + ");");
 
-            System.out.println("Successfully connected to db");
+            System.out.println("Successfully connected to database");
         } catch(SQLException e) {
             e.printStackTrace();
         }
