@@ -1,1 +1,1 @@
-{"name":"hello","imageSrc":"http://localhost:8080/assets/64x64.png","toolData":{"brushes":[{"fill":false,"fillColor":"#ffffff","transparency":1.0,"points":{"x":[[585.0,585.0]],"y":[[1920.5,1920.75]]},"thickness":5.0}],"waypoints":[]}}
+{"name":"hello","imageSrc":"http://localhost:8080/assets/64x64.png","toolData":{"brushes":[{"fill":false,"fillColor":"#ffffff","transparency":1.0,"points":{"x":[],"y":[]},"thickness":5.0}],"waypoints":[]}}

@@ -26,11 +26,15 @@ public class SavemapController {
         try {
             Random rand = new Random();
 
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/mapper?user=root&password=password");
-            Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES (\"" + map.name + "\", \"Garper_\", \"\", " + rand.nextInt(1000) + ");");
+            String address = System.getenv("SQLaddress");
+            String user = System.getenv("SQLlogin");
+            String password = System.getenv("SQLpassword");
 
-            System.out.println("Successfully connected");
+            Connection connection = DriverManager.getConnection(address + "/mapper", user, password);
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.name + "', 'Garper_', '', " + rand.nextInt(1000) + ");");
+
+            System.out.println("Successfully connected to db");
         } catch(SQLException e) {
             e.printStackTrace();
         }
