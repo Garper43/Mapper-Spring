@@ -33,6 +33,7 @@ public class SavemapController {
             Connection connection = DriverManager.getConnection(address + "/mapper", user, password);
             Statement statement = connection.createStatement();
             statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.name + "', 'Garper_', '', " + rand.nextInt(1000) + ");");
+            statement.close();
 
             System.out.println("Successfully connected to database");
         } catch(SQLException e) {
