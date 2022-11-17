@@ -42,6 +42,39 @@ button, input {
     overflow: hidden;;
 }
 
+#menu {
+    overflow: visible;
+    position: absolute;
+    width: 20em;
+    height: 100%;;
+    left: -20em;
+    top: 0em;
+    z-index: 5;
+    border-radius: 0em;
+    transition-timing-function: cubic-bezier(.08,.82,.17,1);
+    transition: 100ms;
+    display: flex;
+    flex-flow: column;
+    padding: 6em 0em 0em 0em;
+}
+
+#menu button {
+    width: auto;
+    background-color: red;
+    height: max-content;
+}
+
+#menu-hover {
+    position: absolute;
+    left: 1em;
+    top: 1em;
+    z-index: 6;
+}
+
+#menu-hover:hover ~ #menu, #menu:hover {
+    left: 0em;
+}
+
 #search-menu {
     position: absolute;
     top: 10%;
