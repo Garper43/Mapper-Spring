@@ -1,4 +1,4 @@
-package com.mapper.web;
+package com.mapper.web.controllers;
 
 import com.mapper.beans.SerializedMap;
 import org.springframework.http.HttpStatus;
@@ -13,7 +13,7 @@ import java.sql.*;
 import java.util.Random;
 
 @Controller
-public class SavemapController {
+public class SaveMapController {
     private final String MAPS_DIR = "src/main/resources/static/maps/";
 
     @RequestMapping(value = "/savemap", method = RequestMethod.POST)
