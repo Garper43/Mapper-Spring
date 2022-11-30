@@ -22,26 +22,26 @@ public class SaveMapController {
         System.out.println("POSTING");
         System.out.println(map.toString());
         ResponseEntity status;
+        Random rand = new Random();
+        int id = rand.nextInt(1000);
 
         try {
-            Random rand = new Random();
-
             String address = System.getenv("SQLaddress");
             String user = System.getenv("SQLlogin");
             String password = System.getenv("SQLpassword");
 
             Connection connection = DriverManager.getConnection(address + "/mapper", user, password);
             Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.name + "', 'Garper_', '', " + rand.nextInt(1000) + ");");
+            statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.name + "', 'Garper_', '', " + id + ");");
             statement.close();
+            connection.close();
 
-            System.out.println("Successfully connected to database");
         } catch(SQLException e) {
             e.printStackTrace();
         }
 
         try {
-            File file = new File(MAPS_DIR + map.name + ".json");
+            File file = new File(MAPS_DIR + id + ".json");
             FileWriter writer = new FileWriter(file);
 
             writer.write(map.toString());
