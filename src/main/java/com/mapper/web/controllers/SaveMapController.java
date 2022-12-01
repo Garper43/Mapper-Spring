@@ -23,25 +23,27 @@ public class SaveMapController {
         System.out.println(map.toString());
         ResponseEntity status;
         Random rand = new Random();
-        int id = rand.nextInt(1000);
+
+        //TODO: find a more secure way to do this, the client shouldn't be trusted with setting the id
+        //keep old id if map already has one, and pick one if it doesn't
+        if(map.id == -1) {
+            map.id = rand.nextInt(1000);
+        }
 
         try {
+            //make a db entry for the map
             String address = System.getenv("SQLaddress");
             String user = System.getenv("SQLlogin");
             String password = System.getenv("SQLpassword");
 
             Connection connection = DriverManager.getConnection(address + "/mapper", user, password);
             Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.name + "', 'Garper_', '', " + id + ");");
+            statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.name + "', 'Garper_', '', " + map.id + ");");
             statement.close();
             connection.close();
 
-        } catch(SQLException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            File file = new File(MAPS_DIR + id + ".json");
+            //save map to a file
+            File file = new File(MAPS_DIR + map.id + ".json");
             FileWriter writer = new FileWriter(file);
 
             writer.write(map.toString());
@@ -52,6 +54,7 @@ public class SaveMapController {
             e.printStackTrace();
             status = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
         return status;
     }
 }

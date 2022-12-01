@@ -9,12 +9,13 @@
 <body>
 
 
-    <image id="menu-hover" src="assets/64x64.png" />
+    <image id="menu-hover" src="assets/menu_icon.svg" />
     <div id="menu" class="panel" >
-        <button id="menu-search" >Search</button>
+        <button id="menu-search" onclick="openSearch()" >Search</button>
     </div>
 
     <div id="search-menu" class="panel" >
+        <button id="search-exit" onclick="closeSearch()" ><image src="assets/close_icon.svg" /></button>
         <div id="search-bar-menu" >
             <input id="search-bar" >
         </div>

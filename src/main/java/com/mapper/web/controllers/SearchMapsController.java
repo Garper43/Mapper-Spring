@@ -1,5 +1,6 @@
 package com.mapper.web.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mapper.Config;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,40 +12,60 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 @Controller
 public class SearchMapsController {
+    private static final String[] IGNORED_KEYWORDS = new String[]{"map"};
 
     @RequestMapping(value = "/searchmap", method = RequestMethod.GET)
     @ResponseBody
     public String saveMap(@RequestParam(name = "name") String name) {
-        String[] keywords = name.split("\\|");
-        System.out.println(Arrays.toString(keywords));
+        String[] keywords = name.split("\\,");
         String resultIDs = "";
 
         try {
-            StringBuffer query = new StringBuffer("""
+            //build query
+            String query = """
                 SELECT ID 
                 FROM MAPS 
                 WHERE
-            """);
+            """;
 
+            keywordLoop:
             for(String keyword : keywords) {
-                query.append("NAME LIKE '%" + keyword + "%' ");
+                //ignore certain keywords
+                for(String ignoredKeyword : IGNORED_KEYWORDS) {
+                    if(keyword.toLowerCase().equals(ignoredKeyword)) {
+                        System.out.println("ignoring " + keyword);
+                        continue keywordLoop;
+                    }
+                }
+
+                query += "NAME LIKE '%" + keyword + "%' OR ";
             }
-            query.append(";");
+            query += "FALSE;";
 
-            System.out.println(query.toString());
-
+            //get maps from db
             Connection connection = DriverManager.getConnection(Config.address + "/mapper", Config.USER, Config.PASSWORD);
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(query.toString());
+            ResultSet resultSet = statement.executeQuery(query);
+            LinkedList<String> resultIDsList = new LinkedList<>();
 
+            //fill ArrayList with resulting IDs
             while(resultSet.next()) {
-                resultIDs += "" + resultSet.getInt(1) + ",";
+                resultIDsList.add("" + resultSet.getInt("ID"));
             };
 
+            //convert ArrayList to json String
+            String[] resultIDsArr = resultIDsList.toArray(String[]::new);
+            ObjectMapper mapper = new ObjectMapper();
+            resultIDs = mapper.writeValueAsString(resultIDsArr);
+
+            //close everything
             statement.close();
             connection.close();
 

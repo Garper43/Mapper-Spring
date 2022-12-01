@@ -18,7 +18,7 @@ function update() {
 }
 
 //load waypoint image file
-tool.waypoint.icon.src = "assets/waypoint_icon.png";
+tool.waypoint.icon.src = "assets/waypoint_icon.svg";
 tool.waypoint.icon.onload = function() {
     update();
 }

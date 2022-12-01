@@ -20,6 +20,7 @@ let ui = {
     waypointBox: document.getElementById("waypoint-box"),
     waypointTextArea: document.getElementById("waypoint-textarea"),
     waypointName: document.getElementById("waypoint-name"),
+    searchMenu: document.getElementById("search-menu"),
 
     //methods
     addBrushBtn: (color) => {
@@ -160,3 +161,16 @@ function setName() {
 
 //add default brush
 tool.brush.addBrush("#ffffff", 5);
+
+async function searchMaps(query) {
+    var link = "http://localhost:8080/searchmap?name=" + query.replace(" ", ",");
+    console.log(link);
+    return await map.utils.getData(link);
+}
+
+function openSearch() {
+    ui.searchMenu.style.display = "initial";
+}
+function closeSearch() {
+    ui.searchMenu.style.display = "none";
+}

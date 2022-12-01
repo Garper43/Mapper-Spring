@@ -1,8 +1,11 @@
 var map = {
+    name: "",
+    //id is -1 for every new map, the server will decide on a new one once it's saved
+    id: -1,
     image: {
         file: new Image(),
         //TODO: this is a bit redundant, try to get rid of it later
-        src: "assets/empty.svg",
+        src: "assets/maps/empty.svg",
 
         //these dimentions are placeholders and will be replaced in image.file.onload()
         //they are used for calculating displayed image size
@@ -77,6 +80,7 @@ var map = {
         saveMap: (mapName) => {
             let tempMap = {};
             tempMap.name = mapName;
+            tempMap.id = map.id;
             tempMap.imageSrc = map.image.file.src;
             tempMap.toolData = map.toolData;
 
@@ -87,20 +91,15 @@ var map = {
             request.setRequestHeader("Content-Type", "application/json");
             request.send(serializedMap);
         },
-
+        //TODO: move this somewhere else
         getData: async (link) => {
             var data;
         
             await fetch(link)
             .then((response) => {
-                return response.json();
-        
+                data = response.json();
             })
-            .then((json) => {
-                data = json;
-        
-            }) 
-        
+
             return data;
         },
     }
