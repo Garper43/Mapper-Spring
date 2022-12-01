@@ -4,16 +4,40 @@
 <head>
     <link rel="stylesheet" href="index.css">
     <meta charset="UTF8"> 
-    <title>Mapper</title>
+    <title>Mapper🗺️</title>
 </head>
 <body>
+
+
+    <image id="menu-hover" src="assets/menu_icon.svg" />
+    <div id="menu" class="panel" >
+        <button id="menu-search" onclick="openSearch()" >Search</button>
+    </div>
+
+    <div id="search-menu" class="panel" >
+        <button id="search-exit" onclick="closeSearch()" ><image src="assets/close_icon.svg" /></button>
+        <div id="search-bar-menu" >
+            <input id="search-bar" >
+        </div>
+        <div id="search-results" >
+            <div class="map-preview" ></div>
+            <div class="map-preview" ></div>
+            <div class="map-preview" ></div>
+            <div class="map-preview" ></div>
+            <div class="map-preview" ></div>
+            <div class="map-preview" ></div>
+            <div class="map-preview" ></div>
+            <div class="map-preview" ></div>
+            <div class="map-preview" ></div>
+        </div>
+    </div>
 
     <div id="waypoint-box" >
         <input id="waypoint-name" placeholder="name" >
         <textarea id="waypoint-textarea" spellcheck="false" ></textarea>
     </div>
 
-    <div id="toolbar-wrapper" >
+    <div id="toolbar-wrapper" class="panel" >
         <!--<h2>Toolbar</h2>-->
         <div id="toolbar" >
             <button id="pointer" class="tool">pointer</button>

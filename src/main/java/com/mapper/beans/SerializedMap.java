@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class SerializedMap {
 
     public String name;
+    public int id;
     public String imageSrc;
     public ToolData toolData;
 

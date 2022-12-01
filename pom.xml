@@ -8,13 +8,13 @@
 		<version>2.7.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
+	<groupId>org.garper</groupId>
 	<artifactId>mapper</artifactId>
 	<version>0.1</version>
-	<name>serving-web-content</name>
-	<description>Demo project for Spring Boot</description>
+	<name>mapper</name>
+	<description>marks maps of whatever</description>
 	<properties>
-		<java.version>8</java.version>
+		<java.version>17</java.version>
 		<maven.test.skip>true</maven.test.skip>
 	</properties>
 	<dependencies>
@@ -54,6 +54,14 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<addResources>true</addResources>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>15</source>
+					<target>15</target>
 				</configuration>
 			</plugin>
 		</plugins>
