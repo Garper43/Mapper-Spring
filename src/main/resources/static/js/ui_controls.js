@@ -21,6 +21,9 @@ let ui = {
     waypointTextArea: document.getElementById("waypoint-textarea"),
     waypointName: document.getElementById("waypoint-name"),
     searchMenu: document.getElementById("search-menu"),
+    searchInput: document.getElementById("search-bar"),
+    saveMenu: document.getElementById("save-menu"),
+    saveInput: document.getElementById("save-menu-input"),
 
     //methods
     addBrushBtn: (color) => {
@@ -173,4 +176,11 @@ function openSearch() {
 }
 function closeSearch() {
     ui.searchMenu.style.display = "none";
+}
+
+function openSave() {
+    ui.saveMenu.parentElement.style.display = "flex";
+}
+function closeSave() {
+    ui.saveMenu.parentElement.style.display = "none";
 }
