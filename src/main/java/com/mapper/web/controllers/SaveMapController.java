@@ -26,8 +26,8 @@ public class SaveMapController {
 
         //TODO: find a more secure way to do this, the client shouldn't be trusted with setting the id
         //keep old id if map already has one, and pick one if it doesn't
-        if(map.id == -1) {
-            map.id = rand.nextInt(1000);
+        if(map.getId() == -1) {
+            map.setId(rand.nextInt(1000));
         }
 
         try {
@@ -38,12 +38,12 @@ public class SaveMapController {
 
             Connection connection = DriverManager.getConnection(address + "/mapper", user, password);
             Statement statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.name + "', 'Garper_', '', " + map.id + ");");
+            statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.getName() + "', 'Garper_', '', " + map.getId() + ");");
             statement.close();
             connection.close();
 
             //save map to a file
-            File file = new File(MAPS_DIR + map.id + ".json");
+            File file = new File(MAPS_DIR + map.getId() + ".json");
             FileWriter writer = new FileWriter(file);
 
             writer.write(map.toString());
