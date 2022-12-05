@@ -12,6 +12,7 @@
     <image id="menu-hover" src="assets/menu_icon.svg" />
     <div id="menu" class="panel" >
         <button id="menu-search" onclick="openSearch()" >Search</button>
+        <button id="menu-search" onclick="openSave()" >Save</button>
     </div>
 
     <div id="search-menu" class="panel" >
@@ -31,6 +32,17 @@
             <div class="map-preview" ></div>
         </div>
     </div>
+
+    <div class="center-wrapper" >
+        <div id="save-menu"class="panel" >
+            <input id="save-menu-input" >
+            <div id="save-menu-controls" >
+                <button onclick="map.utils.saveMap(ui.saveInput.value); closeSave()" >Save</button>
+                <button onclick="closeSave()" >Cancel</button>   
+            </div> 
+        </div>    
+    </div>
+    
 
     <div id="waypoint-box" >
         <input id="waypoint-name" placeholder="name" >
