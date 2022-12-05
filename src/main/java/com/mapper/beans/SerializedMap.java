@@ -8,6 +8,7 @@ public class SerializedMap {
     private int id;
     private String imageSrc;
     private ToolData toolData;
+    private String Description;
 
     public String getName() {
         return name;
@@ -35,6 +36,13 @@ public class SerializedMap {
     }
     public void setToolData(ToolData toolData) {
         this.toolData = toolData;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+    public void setDescription(String description) {
+        Description = description;
     }
 
     //returns a JSON representation of the object

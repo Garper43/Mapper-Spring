@@ -1,5 +1,6 @@
 package com.mapper.web.controllers;
 
+import com.mapper.Config;
 import com.mapper.beans.SerializedMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,6 @@ import java.util.Random;
 
 @Controller
 public class SaveMapController {
-    private final String MAPS_DIR = "src/main/resources/static/maps/";
 
     @RequestMapping(value = "/savemap", method = RequestMethod.POST)
     @ResponseBody
@@ -43,7 +43,7 @@ public class SaveMapController {
             connection.close();
 
             //save map to a file
-            File file = new File(MAPS_DIR + map.getId() + ".json");
+            File file = new File(Config.MAPS_DIR + map.getId() + ".json");
             FileWriter writer = new FileWriter(file);
 
             writer.write(map.toString());

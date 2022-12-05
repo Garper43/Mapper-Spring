@@ -1,5 +1,6 @@
 var map = {
     name: "",
+    description: "",
     //id is -1 for every new map, the server will decide on a new one once it's saved
     id: -1,
     image: {
@@ -44,6 +45,11 @@ var map = {
             map.y = 0;
             map.scale = 1;
 
+            //set metadata
+            map.name = tempMap.name;
+            map.description = tempMap.description;
+            map.id = tempMap.id;
+
             //set up tool data
             map.toolData = tempMap.toolData;
 
@@ -81,6 +87,7 @@ var map = {
             let tempMap = {};
             tempMap.name = mapName;
             tempMap.id = map.id;
+            tempMap.description = map.description;
             tempMap.imageSrc = map.image.file.src;
             tempMap.toolData = map.toolData;
 
