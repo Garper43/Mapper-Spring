@@ -45,7 +45,7 @@ let waypoint = {
         ui.waypointBox.style.height = waypoint.height + "px";
 
         ui.waypointName.value = waypoint.name;
-        ui.waypointTextArea.value = waypoint.content;
+        ui.waypointTextArea.innerHTML = waypoint.content;
 
         ui.waypointBox.style.display = "block";
     },
@@ -57,7 +57,7 @@ let waypoint = {
         map.toolData.waypoints[tool.waypoint.selWaypoint].height = ui.waypointBox.offsetHeight - 20;
 
         map.toolData.waypoints[tool.waypoint.selWaypoint].name = ui.waypointName.value;
-        map.toolData.waypoints[tool.waypoint.selWaypoint].content = ui.waypointTextArea.value;
+        map.toolData.waypoints[tool.waypoint.selWaypoint].content = ui.waypointTextArea.innerHTML;
 
 
         tool.waypoint.selWaypoint = -1;
