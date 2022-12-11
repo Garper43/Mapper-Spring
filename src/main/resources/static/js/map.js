@@ -38,7 +38,7 @@ var map = {
     utils: {
         loadMap: async (id) => {
             var link = "http://localhost:8080/maps/" + id + ".json";
-            var tempMap = await map.utils.getData(link);
+            var tempMap = await netUtils.getData(link);
 
             //reset map position
             map.x = 0;
@@ -97,17 +97,6 @@ var map = {
             request.open("POST", "/savemap");
             request.setRequestHeader("Content-Type", "application/json");
             request.send(serializedMap);
-        },
-        //TODO: move this somewhere else
-        getData: async (link) => {
-            var data;
-        
-            await fetch(link)
-            .then((response) => {
-                data = response.json();
-            })
-
-            return data;
         },
     }
 }

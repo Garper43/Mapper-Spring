@@ -22,6 +22,7 @@ let ui = {
     waypointName: document.getElementById("waypoint-name"),
     searchMenu: document.getElementById("search-menu"),
     searchInput: document.getElementById("search-bar"),
+    searchResults: document.getElementById("search-results"),
     saveMenu: document.getElementById("save-menu"),
     saveInput: document.getElementById("save-menu-input"),
 
@@ -165,10 +166,36 @@ function setName() {
 //add default brush
 tool.brush.addBrush("#ffffff", 5);
 
-async function searchMaps(query) {
-    var link = "http://localhost:8080/searchmap?name=" + query.replace(" ", ",");
-    console.log(link);
-    return await map.utils.getData(link);
+async function searchMaps() {
+    var query = ui.searchInput.value;
+    //get IDs of matching maps
+    var mapIDs;
+    await netUtils.searchMaps(query).then(
+        (response) => {
+            mapIDs = response;
+        }
+    );
+    //get map previews to display
+    var mapPreviews;
+    await netUtils.getMapPreviews(mapIDs).then(
+        (response) => {
+            mapPreviews = response;
+        }
+    );
+
+    addMapPreviews(mapPreviews);
+}
+
+function clearMapPreviews() {
+    ui.searchResults.innerHTML = "";
+}
+
+async function addMapPreviews(mapPreviews) {
+    console.log(mapPreviews);
+
+    for(mapPreview in mapPreviews) {
+
+    }
 }
 
 function openSearch() {

@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@font-face {
+    font-family: 'FiraCode-Regular';
+    src: url('/assets/fonts/FiraCode-Regular.woff2') format('woff2'),
+    url('/assets/fonts/FiraCode-Regular.woff') format('woff'),
+    url('/assets/fonts/FiraCode-VF.ttf') format('ttf');
+}
 
 :root {
     --background :rgb(37, 37, 37);
-    --panel: rgb(26, 26, 26);
+    --dark1: rgb(26, 26, 26);
+    --panel: rgba(26, 26, 26, 0.456);
     --text-color1: rgb(219, 219, 219);
     --text-color2: rgb(185, 185, 185);
-    --accent1: rgb(221, 183, 34);
+    --accent1: rgb(255, 215, 0);
     --accent2: rgb(88, 88, 88);
 }
 
@@ -16,7 +23,7 @@ body, html {
     background-color: rgb(37, 37, 37);
     overflow: hidden;
     color: var(--text-color2);
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Open-Sans', sans-serif;
     font-size: 1em;
 }
 
@@ -35,8 +42,15 @@ button, input {
     /* border-bottom: 1px solid rgb(90, 90, 90); */
 }
 
+*:focus {
+    background-color: var(--accent1);
+    color: var(--dark1);
+    border: none;
+    outline: none;
+}
+
 .panel {
-    background-color: rgba(26, 26, 26, 0.609);
+    background-color: var(--panel);
     box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.03) inset;
     backdrop-filter: blur(30px);
     border-radius: 1em;
@@ -249,7 +263,8 @@ svg {
 }
 
 .tool:hover ,#brushes > button:hover {
-    border: solid var(--accent1) 1px;
+    background-color: var(--accent1);
+    color: var(--dark1);
 }
 
 #brushes {
