@@ -166,8 +166,15 @@ function setName() {
 //add default brush
 tool.brush.addBrush("#ffffff", 5);
 
-async function searchMaps() {
-    var query = ui.searchInput.value;
+ui.searchInput.addEventListener("keydown", (ev) => {
+    if (ev.key == "Enter") {
+        searchMaps(ui.searchInput.value);
+    };
+});
+
+async function searchMaps(query) {
+    clearMapPreviews();
+
     //get IDs of matching maps
     var mapIDs;
     await netUtils.searchMaps(query).then(
@@ -180,10 +187,9 @@ async function searchMaps() {
     await netUtils.getMapPreviews(mapIDs).then(
         (response) => {
             mapPreviews = response;
+            addMapPreviews(mapPreviews);
         }
     );
-
-    addMapPreviews(mapPreviews);
 }
 
 function clearMapPreviews() {
@@ -191,10 +197,10 @@ function clearMapPreviews() {
 }
 
 async function addMapPreviews(mapPreviews) {
-    console.log(mapPreviews);
-
-    for(mapPreview in mapPreviews) {
-
+    for(var mapPreview of mapPreviews) {
+        if(mapPreview != undefined) {
+            ui.searchResults.innerHTML += '<div class="map-preview" id="map-preview-template" onclick="map.utils.loadMap('+mapPreview.id+')" ><h4>'+mapPreview.name+'</h4></div>';
+        }
     }
 }
 

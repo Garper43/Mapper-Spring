@@ -108,9 +108,9 @@ button, input {
     top: 10%;
     left: 10%;
     width: 80%;
-    height: 80%;;
+    height: 80%;
     z-index: 4;
-    display: none;;
+    display: none;
 }
 
 #search-exit {
@@ -160,6 +160,11 @@ button, input {
     background-color: rgb(55, 55, 55);
     border-radius: 0.5em;
     margin: 0.7em 0.5em;
+    padding: 0.5em;
+}
+
+.map-preview h4 {
+    margin: 0em;
 }
 
 #save-menu {
