@@ -1,5 +1,6 @@
 var map = {
     name: "",
+    description: "",
     //id is -1 for every new map, the server will decide on a new one once it's saved
     id: -1,
     image: {
@@ -37,12 +38,17 @@ var map = {
     utils: {
         loadMap: async (id) => {
             var link = "http://localhost:8080/maps/" + id + ".json";
-            var tempMap = await map.utils.getData(link);
+            var tempMap = await netUtils.getData(link);
 
             //reset map position
             map.x = 0;
             map.y = 0;
             map.scale = 1;
+
+            //set metadata
+            map.name = tempMap.name;
+            map.description = tempMap.description;
+            map.id = tempMap.id;
 
             //set up tool data
             map.toolData = tempMap.toolData;
@@ -81,6 +87,7 @@ var map = {
             let tempMap = {};
             tempMap.name = mapName;
             tempMap.id = map.id;
+            tempMap.description = map.description;
             tempMap.imageSrc = map.image.file.src;
             tempMap.toolData = map.toolData;
 
@@ -90,17 +97,6 @@ var map = {
             request.open("POST", "/savemap");
             request.setRequestHeader("Content-Type", "application/json");
             request.send(serializedMap);
-        },
-        //TODO: move this somewhere else
-        getData: async (link) => {
-            var data;
-        
-            await fetch(link)
-            .then((response) => {
-                data = response.json();
-            })
-
-            return data;
         },
     }
 }

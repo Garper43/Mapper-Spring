@@ -22,6 +22,7 @@ let ui = {
     waypointName: document.getElementById("waypoint-name"),
     searchMenu: document.getElementById("search-menu"),
     searchInput: document.getElementById("search-bar"),
+    searchResults: document.getElementById("search-results"),
     saveMenu: document.getElementById("save-menu"),
     saveInput: document.getElementById("save-menu-input"),
 
@@ -165,10 +166,42 @@ function setName() {
 //add default brush
 tool.brush.addBrush("#ffffff", 5);
 
+ui.searchInput.addEventListener("keydown", (ev) => {
+    if (ev.key == "Enter") {
+        searchMaps(ui.searchInput.value);
+    };
+});
+
 async function searchMaps(query) {
-    var link = "http://localhost:8080/searchmap?name=" + query.replace(" ", ",");
-    console.log(link);
-    return await map.utils.getData(link);
+    clearMapPreviews();
+
+    //get IDs of matching maps
+    var mapIDs;
+    await netUtils.searchMaps(query).then(
+        (response) => {
+            mapIDs = response;
+        }
+    );
+    //get map previews to display
+    var mapPreviews;
+    await netUtils.getMapPreviews(mapIDs).then(
+        (response) => {
+            mapPreviews = response;
+            addMapPreviews(mapPreviews);
+        }
+    );
+}
+
+function clearMapPreviews() {
+    ui.searchResults.innerHTML = "";
+}
+
+async function addMapPreviews(mapPreviews) {
+    for(var mapPreview of mapPreviews) {
+        if(mapPreview != undefined) {
+            ui.searchResults.innerHTML += '<div class="map-preview" id="map-preview-template" onclick="map.utils.loadMap('+mapPreview.id+')" ><h4>'+mapPreview.name+'</h4></div>';
+        }
+    }
 }
 
 function openSearch() {
