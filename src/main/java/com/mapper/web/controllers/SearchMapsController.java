@@ -65,8 +65,6 @@ public class SearchMapsController {
             ObjectMapper mapper = new ObjectMapper();
             resultIDs = mapper.writeValueAsString(resultIDsArr);
 
-            System.out.println(query + " " + resultIDs);
-
             //close everything
             statement.close();
             connection.close();
