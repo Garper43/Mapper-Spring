@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,9 +24,9 @@ public class SearchMapsController {
 
     @RequestMapping(value = "/searchmap", method = RequestMethod.GET)
     @ResponseBody
-    public String saveMap(@RequestParam(name = "name") String name) {
+    public String[] saveMap(@RequestParam(name = "name") String name) {
         String[] keywords = name.split("\\,");
-        String resultIDs = "";
+        String[] resultIDsArr = new String[0];
 
         try {
             //build query
@@ -61,9 +62,7 @@ public class SearchMapsController {
             };
 
             //convert ArrayList to json String
-            String[] resultIDsArr = resultIDsList.toArray(String[]::new);
-            ObjectMapper mapper = new ObjectMapper();
-            resultIDs = mapper.writeValueAsString(resultIDsArr);
+            resultIDsArr = resultIDsList.toArray(String[]::new);
 
             //close everything
             statement.close();
@@ -73,6 +72,6 @@ public class SearchMapsController {
             e.printStackTrace();
         }
 
-        return resultIDs;
+        return resultIDsArr;
     }
 }

@@ -18,7 +18,7 @@ public class SaveMapController {
 
     @RequestMapping(value = "/savemap", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity saveMap(@RequestBody SerializedMap map, BindingResult result) {
+    public int saveMap(@RequestBody SerializedMap map, BindingResult result) {
         ResponseEntity status;
         Random rand = new Random();
         boolean newMap = false;
@@ -57,6 +57,6 @@ public class SaveMapController {
             status = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return status;
+        return map.getId();
     }
 }
