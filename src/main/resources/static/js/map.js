@@ -97,6 +97,11 @@ var map = {
             request.open("POST", "/savemap");
             request.setRequestHeader("Content-Type", "application/json");
             request.send(serializedMap);
+
+            //set map id to whatever server chooses
+            request.onload = () => {
+                map.id = request.response;
+            }
         },
     }
 }
