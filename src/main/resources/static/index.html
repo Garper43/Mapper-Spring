@@ -9,30 +9,11 @@
 <body>
 
 
-    <image id="menu-hover" src="assets/menu_icon.svg" />
+    <img id="menu-hover" src="assets/menu_icon.svg" />
     <div id="menu" class="panel" >
         <button id="menu-search" onclick="openSearch()" >Search</button>
         <button id="menu-search" onclick="openSave()" >Save</button>
-    </div>
-
-    <div id="search-menu" class="panel" >
-        <button id="search-exit" onclick="closeSearch()" ><image src="assets/close_icon.svg" /></button>
-        <div id="search-bar-menu" >
-            <input id="search-bar" placeholder="Search" >
-        </div>
-        <div id="search-results" >
-
-        </div>
-    </div>
-
-    <div class="center-wrapper" >
-        <div id="save-menu"class="panel" >
-            <input id="save-menu-input" >
-            <div id="save-menu-controls" >
-                <button onclick="map.utils.saveMap(ui.saveInput.value); closeSave()" >Save</button>
-                <button onclick="closeSave()" >Cancel</button>   
-            </div> 
-        </div>    
+        <button id="menu-search" onclick="openEdit()" >Edit</button>
     </div>
     
 
@@ -68,6 +49,37 @@
     
     <div id="waypoint-container" >
         <canvas id=canvas ></canvas>     
+    </div>
+
+    <div class="center-wrapper" >
+        <div id="search-menu" class="panel" >
+            <button id="search-exit" onclick="closeSearch()" ><img src="assets/close_icon.svg" /></button>
+            <div id="search-bar-menu" >
+                <input id="search-bar" placeholder="Search" >
+            </div>
+            <div id="search-results" >
+
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="center-wrapper" >
+        <div id="save-menu"class="panel" >
+            <input id="save-menu-input" >
+            <div id="save-menu-controls" >
+                <button onclick="map.utils.saveMap(ui.saveInput.value); closeSave()" >Save</button>
+                <button onclick="closeSave()" >Cancel</button>   
+            </div> 
+        </div>    
+    </div>
+
+    <div class="center-wrapper" >
+        <div id="edit-menu"class="panel" >
+            <div ondrop="fileDrop(event)" ondragover="dragOverHandler(event)" id="map-image-upload" >
+                <img ondrag="" src="assets/file_add.svg" />
+            </div>
+        </div>    
     </div>
        
     

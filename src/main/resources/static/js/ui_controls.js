@@ -25,6 +25,8 @@ let ui = {
     searchResults: document.getElementById("search-results"),
     saveMenu: document.getElementById("save-menu"),
     saveInput: document.getElementById("save-menu-input"),
+    editMenu: document.getElementById("edit-menu"),
+    imageUpload: document.getElementById("map-image-upload"),
 
     //methods
     addBrushBtn: (color) => {
@@ -205,10 +207,10 @@ async function addMapPreviews(mapPreviews) {
 }
 
 function openSearch() {
-    ui.searchMenu.style.display = "initial";
+    ui.searchMenu.parentElement.style.display = "flex";
 }
 function closeSearch() {
-    ui.searchMenu.style.display = "none";
+    ui.searchMenu.parentElement.style.display = "none";
 }
 
 function openSave() {
@@ -216,4 +218,22 @@ function openSave() {
 }
 function closeSave() {
     ui.saveMenu.parentElement.style.display = "none";
+}
+
+function openEdit() {
+    ui.editMenu.parentElement.style.display = "flex";
+}
+function closeEdit() {
+    ui.editMenu.parentElement.style.display = "none";
+}
+
+function fileDrop(ev) {
+    console.log('File(s) dropped');
+    var files = ev.dataTransfer.items;
+    console.log(files);
+    ev.preventDefault();
+}
+
+function dragOverHandler(ev) {
+    ev.preventDefault();
 }
