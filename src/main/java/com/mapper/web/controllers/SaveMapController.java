@@ -18,7 +18,7 @@ public class SaveMapController {
 
     @RequestMapping(value = "/savemap", method = RequestMethod.POST)
     @ResponseBody
-    public int saveMap(@RequestBody SerializedMap map, BindingResult result) {
+    public int saveMap(@RequestBody SerializedMap map) {
         ResponseEntity status;
         Random rand = new Random();
         boolean newMap = false;

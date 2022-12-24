@@ -229,8 +229,16 @@ function closeEdit() {
 
 function fileDrop(ev) {
     console.log('File(s) dropped');
-    var files = ev.dataTransfer.items;
-    console.log(files);
+    var file = ev.dataTransfer.items[0].getAsFile();
+    console.log(file);
+    var formData = new FormData();
+    formData.set("file", file);
+    
+    request = fetch("/imageupload", {
+        method: "POST",
+        body: formData
+    });
+
     ev.preventDefault();
 }
 
