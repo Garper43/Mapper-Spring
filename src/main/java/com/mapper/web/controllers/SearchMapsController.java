@@ -51,7 +51,7 @@ public class SearchMapsController {
             query += "FALSE;";
 
             //get maps from db
-            Connection connection = DriverManager.getConnection(Config.address + "/mapper", Config.USER, Config.PASSWORD);
+            Connection connection = DriverManager.getConnection(Config.ADDRESS);
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             LinkedList<String> resultIDsList = new LinkedList<>();

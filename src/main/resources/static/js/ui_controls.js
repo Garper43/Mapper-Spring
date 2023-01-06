@@ -227,17 +227,17 @@ function closeEdit() {
     ui.editMenu.parentElement.style.display = "none";
 }
 
-function fileDrop(ev) {
+async function fileDrop(ev) {
     console.log('File(s) dropped');
     var file = ev.dataTransfer.items[0].getAsFile();
     console.log(file);
     var formData = new FormData();
     formData.set("file", file);
-    
+
     request = fetch("/imageupload", {
         method: "POST",
         body: formData
-    });
+    }).then((result) => {console.log(result.ok);});
 
     ev.preventDefault();
 }

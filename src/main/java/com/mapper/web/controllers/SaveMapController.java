@@ -2,12 +2,14 @@ package com.mapper.web.controllers;
 
 import com.mapper.Config;
 import com.mapper.beans.SerializedMap;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.*;
@@ -33,11 +35,7 @@ public class SaveMapController {
         try {
             //make a db entry for the map
             if(newMap) {
-                String address = System.getenv("SQLaddress");
-                String user = System.getenv("SQLlogin");
-                String password = System.getenv("SQLpassword");
-
-                Connection connection = DriverManager.getConnection(address + "/mapper", user, password);
+                Connection connection = DriverManager.getConnection(Config.ADDRESS);
                 Statement statement = connection.createStatement();
                 statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.getName() + "', 'Garper_', '', " + map.getId() + ");");
                 statement.close();
