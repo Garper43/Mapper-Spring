@@ -237,7 +237,14 @@ async function fileDrop(ev) {
     request = fetch("/imageupload", {
         method: "POST",
         body: formData
-    }).then((result) => {console.log(result.ok);});
+    }).then((result) => {
+        //update map image
+        if(result.ok) {
+            map.image.file = new Image();
+            map.image.file.src = `/assets/maps/${file.name}`;
+            map.image.file.onload = map.utils.imageOnload;
+        }
+    });
 
     ev.preventDefault();
 }

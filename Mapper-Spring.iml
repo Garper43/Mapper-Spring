@@ -78,7 +78,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-jcl:5.3.23" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.3.23" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.9.0" level="project" />
-    <orderEntry type="library" name="Maven: com.mysql:mysql-connector-j:8.0.31" level="project" />
-    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.19.4" level="project" />
+    <orderEntry type="library" name="Maven: org.xerial:sqlite-jdbc:3.40.0.0" level="project" />
   </component>
 </module>
