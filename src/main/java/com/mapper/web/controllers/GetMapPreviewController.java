@@ -3,19 +3,11 @@ package com.mapper.web.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mapper.Config;
 import com.mapper.beans.MapPreview;
-import com.mapper.beans.SerializedMap;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.mapper.beans.serializedMap.SerializedMap;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Statement;
-import java.util.Random;
 
 @Controller
 public class GetMapPreviewController {
@@ -33,9 +25,7 @@ public class GetMapPreviewController {
         for (int i = 0; i < idArr.length; i++) {
             try {
                 //read map files with requested IDs
-                File file = new File(Config.MAPS_DIR + "/" + idArr[i] + ".json");
-                ObjectMapper mapper = new ObjectMapper();
-                SerializedMap serMap = mapper.readValue(file, SerializedMap.class);
+                SerializedMap serMap = SerializedMap.readFromFile(new File(Config.MAPS_DIR + "/" + idArr[i] + ".json"));
                 MapPreview mapPreview = new MapPreview(serMap);
                 mapsArr[i] = mapPreview;
             } catch(Exception e) {

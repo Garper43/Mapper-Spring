@@ -1,15 +1,12 @@
 package com.mapper.web.controllers;
 
 import com.mapper.Config;
-import com.mapper.beans.SerializedMap;
-import org.springframework.boot.jdbc.DataSourceBuilder;
+import com.mapper.beans.serializedMap.SerializedMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.sql.DataSource;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.*;
@@ -21,7 +18,6 @@ public class SaveMapController {
     @RequestMapping(value = "/savemap", method = RequestMethod.POST)
     @ResponseBody
     public int saveMap(@RequestBody SerializedMap map) {
-        ResponseEntity status;
         Random rand = new Random();
         boolean newMap = false;
 
@@ -43,16 +39,9 @@ public class SaveMapController {
             }
 
             //save map to a file
-            File file = new File(Config.MAPS_DIR + map.getId() + ".json");
-            FileWriter writer = new FileWriter(file);
-
-            writer.write(map.toString());
-
-            writer.close();
-            status = new ResponseEntity(HttpStatus.ACCEPTED);
+            map.saveAsFile(new File(Config.MAPS_DIR + map.getId() + ".json"));
         } catch(Exception e) {
             e.printStackTrace();
-            status = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return map.getId();
