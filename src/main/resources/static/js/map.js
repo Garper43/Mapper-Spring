@@ -94,6 +94,14 @@ var map = {
             tempMap.imageSrc = map.image.file.src;
             tempMap.toolData = map.toolData;
 
+            netUtils.uploadImage(map.image.file).then((result) => {
+                if(result.ok) {
+                    map.image.file.src = `localhost:8080/assets/maps/${map.image.file.name}`;
+                } else {
+                    alert("couldn't upload image");
+                }
+            });
+
             let serializedMap = JSON.stringify(tempMap);
 
             let request = new XMLHttpRequest();

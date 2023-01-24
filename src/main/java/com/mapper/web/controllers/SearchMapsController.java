@@ -41,7 +41,6 @@ public class SearchMapsController {
                 //ignore certain keywords
                 for(String ignoredKeyword : IGNORED_KEYWORDS) {
                     if(keyword.toLowerCase().equals(ignoredKeyword)) {
-                        System.out.println("ignoring " + keyword);
                         continue keywordLoop;
                     }
                 }

@@ -228,23 +228,17 @@ function closeEdit() {
 }
 
 async function fileDrop(ev) {
-    console.log('File(s) dropped');
     var file = ev.dataTransfer.items[0].getAsFile();
-    console.log(file);
-    var formData = new FormData();
-    formData.set("file", file);
+    var reader = new FileReader();
 
-    request = fetch("/imageupload", {
-        method: "POST",
-        body: formData
-    }).then((result) => {
-        //update map image
-        if(result.ok) {
-            map.image.file = new Image();
-            map.image.file.src = `/assets/maps/${file.name}`;
-            map.image.file.onload = map.utils.imageOnload;
-        }
-    });
+    //This is for previewing the image
+    reader.onload = function (event) {
+        map.image.file.name = file.name;
+        map.image.file.src = event.target.result;
+    }
+    reader.readAsDataURL(file);
+
+    map.image.file.onload = map.utils.imageOnload;
 
     ev.preventDefault();
 }
