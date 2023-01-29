@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.web.SecurityFilterChain;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -21,4 +23,12 @@ public class ServingWebContentApplication {
 
 		app.run(args);
 	}
+
+//	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//		http.
+//			formLogin(form -> form
+//				.loginPage("/login")
+//				.permitAll()
+//		);
+//	}
 }
