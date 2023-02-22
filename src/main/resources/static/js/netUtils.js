@@ -16,6 +16,16 @@ const netUtils = {
     getMapPreviews: async (IDs) => {
         var link = "http://localhost:8080/getmappreview?IDs=" + IDs.toString();
         return await netUtils.getData(link);
-    }
-    
+    },
+    uploadImage: async (file) => {
+        var formData = new FormData();
+        formData.set("file", file);
+
+        request = fetch("/imageupload", {
+            method: "POST",
+            body: formData
+        });
+
+        return request;
+    },
 }

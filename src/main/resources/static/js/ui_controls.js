@@ -25,6 +25,8 @@ let ui = {
     searchResults: document.getElementById("search-results"),
     saveMenu: document.getElementById("save-menu"),
     saveInput: document.getElementById("save-menu-input"),
+    editMenu: document.getElementById("edit-menu"),
+    imageUpload: document.getElementById("map-image-upload"),
 
     //methods
     addBrushBtn: (color) => {
@@ -205,10 +207,10 @@ async function addMapPreviews(mapPreviews) {
 }
 
 function openSearch() {
-    ui.searchMenu.style.display = "initial";
+    ui.searchMenu.parentElement.style.display = "flex";
 }
 function closeSearch() {
-    ui.searchMenu.style.display = "none";
+    ui.searchMenu.parentElement.style.display = "none";
 }
 
 function openSave() {
@@ -216,4 +218,31 @@ function openSave() {
 }
 function closeSave() {
     ui.saveMenu.parentElement.style.display = "none";
+}
+
+function openEdit() {
+    ui.editMenu.parentElement.style.display = "flex";
+}
+function closeEdit() {
+    ui.editMenu.parentElement.style.display = "none";
+}
+
+async function fileDrop(ev) {
+    var file = ev.dataTransfer.items[0].getAsFile();
+    var reader = new FileReader();
+
+    //This is for previewing the image
+    reader.onload = function (event) {
+        map.image.file.name = file.name;
+        map.image.file.src = event.target.result;
+    }
+    reader.readAsDataURL(file);
+
+    map.image.file.onload = map.utils.imageOnload;
+
+    ev.preventDefault();
+}
+
+function dragOverHandler(ev) {
+    ev.preventDefault();
 }

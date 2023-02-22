@@ -1,11 +1,10 @@
 package com.mapper.web.controllers;
 
 import com.mapper.Config;
-import com.mapper.beans.SerializedMap;
+import com.mapper.beans.serializedMap.SerializedMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
@@ -18,8 +17,7 @@ public class SaveMapController {
 
     @RequestMapping(value = "/savemap", method = RequestMethod.POST)
     @ResponseBody
-    public int saveMap(@RequestBody SerializedMap map, BindingResult result) {
-        ResponseEntity status;
+    public int saveMap(@RequestBody SerializedMap map) {
         Random rand = new Random();
         boolean newMap = false;
 
@@ -33,11 +31,7 @@ public class SaveMapController {
         try {
             //make a db entry for the map
             if(newMap) {
-                String address = System.getenv("SQLaddress");
-                String user = System.getenv("SQLlogin");
-                String password = System.getenv("SQLpassword");
-
-                Connection connection = DriverManager.getConnection(address + "/mapper", user, password);
+                Connection connection = DriverManager.getConnection(Config.ADDRESS);
                 Statement statement = connection.createStatement();
                 statement.executeUpdate("INSERT INTO MAPS (NAME, AUTHOR, META, ID) VALUES ('" + map.getName() + "', 'Garper_', '', " + map.getId() + ");");
                 statement.close();
@@ -45,16 +39,9 @@ public class SaveMapController {
             }
 
             //save map to a file
-            File file = new File(Config.MAPS_DIR + map.getId() + ".json");
-            FileWriter writer = new FileWriter(file);
-
-            writer.write(map.toString());
-
-            writer.close();
-            status = new ResponseEntity(HttpStatus.ACCEPTED);
+            map.saveAsFile(new File(Config.MAPS_DIR + map.getId() + ".json"));
         } catch(Exception e) {
             e.printStackTrace();
-            status = new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
         return map.getId();

@@ -61,17 +61,6 @@ function drawBrushes() {
     } 
 }
 
-function toHex(value) {
-    a = Math.floor(value/16);
-    b = Math.floor(value - a*16);
-
-    //a & b are converted to strings here
-    a = hexDigits[a];
-    b = hexDigits[b];
-
-    return a + b;
-}
-
 function drawWaypoints() {
     let x;
     let y;
@@ -103,8 +92,19 @@ function drawWaypoints() {
     
 }
 
+function toHex(value) {
+    a = Math.floor(value/16);
+    b = Math.floor(value - a*16);
+
+    //a & b are converted to characters here
+    a = hexDigits[a];
+    b = hexDigits[b];
+
+    return a + b;
+}
+
 function scaleCoordinate(coordinate, origin, factor) {
-    //scale scale cordinates of point
+    //scale cordinates of point
     xScaled = coordinate + (coordinate - origin) * factor;
 
     //move point cordinates

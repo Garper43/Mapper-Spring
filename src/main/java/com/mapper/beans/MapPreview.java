@@ -1,5 +1,7 @@
 package com.mapper.beans;
 
+import com.mapper.beans.serializedMap.SerializedMap;
+
 public class MapPreview {
      public MapPreview() {
 
