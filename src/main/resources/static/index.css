@@ -49,6 +49,19 @@ input:focus {
     outline: none;
 }
 
+.exit {
+    width: min-content;
+    height: min-content;
+    background-color: rgba(255, 0, 0, 0);
+    padding: 1em 1em 0em 0em;
+    border: none;
+}
+
+.exit image {
+    width: 2em;
+    height: 2em;
+}
+
 .panel {
     background-color: var(--panel);
     box-shadow: 0px 0px 20px 0px rgba(255, 255, 255, 0.03) inset;
@@ -113,19 +126,9 @@ input:focus {
 }
 
 #search-exit {
-    width: min-content;
-    height: min-content;
     position: absolute;
     right: 0em;
     top: 0em;
-    background-color: rgba(255, 0, 0, 0);
-    padding: 1em 1em 0em 0em;
-    border: none;
-}
-
-#search-exit image {
-    width: 2em;
-    height: 2em;
 }
 
 #search-bar-menu {
@@ -187,8 +190,14 @@ input:focus {
 }
 
 #edit-menu {
-    padding: 1em;
+    padding: 3em 1em 1em 1em;
     z-index: 4;
+}
+
+#edit-exit {
+    position: absolute;
+    top: 0em;
+    right: 0em;
 }
 
 #map-image-upload {

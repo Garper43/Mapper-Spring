@@ -230,6 +230,8 @@ function closeEdit() {
 async function fileDrop(ev) {
     var file = ev.dataTransfer.items[0].getAsFile();
     var reader = new FileReader();
+    
+    map.imgFile = file;
 
     //This is for previewing the image
     reader.onload = function (event) {

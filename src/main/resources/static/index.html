@@ -53,7 +53,7 @@
 
     <div class="center-wrapper" >
         <div id="search-menu" class="panel" >
-            <button id="search-exit" onclick="closeSearch()" ><img src="assets/close_icon.svg" /></button>
+            <button class="exit" id="search-exit" onclick="closeSearch()" ><img src="assets/close_icon.svg" /></button>
             <div id="search-bar-menu" >
                 <input id="search-bar" placeholder="Search" >
             </div>
@@ -76,6 +76,7 @@
 
     <div class="center-wrapper" >
         <div id="edit-menu"class="panel" >
+            <button class="exit" id="edit-exit" onclick="closeEdit()" ><img src="assets/close_icon.svg" /></button>
             <div ondrop="fileDrop(event)" ondragover="dragOverHandler(event)" id="map-image-upload" >
                 <img ondrag="" src="assets/file_add.svg" />
             </div>

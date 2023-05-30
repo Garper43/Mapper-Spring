@@ -1,4 +1,6 @@
 var map = {
+    //imgfile stores the images file but in a format that can actually be sent to the server
+    imgFile: undefined,
     name: "",
     description: "",
     //id is -1 for every new map, the server will decide on a new one once it's saved
@@ -63,7 +65,7 @@ var map = {
             update();
         },
         loadMap: async (id) => {
-            var link = "http://localhost:8080/maps/" + id + ".json";
+            var link = "/maps/" + id + ".json";
             var tempMap = await netUtils.getData(link);
 
             //reset map position
@@ -91,12 +93,12 @@ var map = {
             tempMap.name = mapName;
             tempMap.id = map.id;
             tempMap.description = map.description;
-            tempMap.imageSrc = map.image.file.src;
+            tempMap.imageSrc = map.imgFile != undefined ? `/assets/maps/${map.imgFile.name}` : map.image.file.src;
             tempMap.toolData = map.toolData;
 
-            netUtils.uploadImage(map.image.file).then((result) => {
-                if(result.ok) {
-                    map.image.file.src = `localhost:8080/assets/maps/${map.image.file.name}`;
+            netUtils.uploadImage(map.imgFile).then((result) => {
+                if(result.ok && map.imgFile != undefined) {
+                    map.image.file.src = `/assets/maps/${map.imgFile.name}`;
                 } else {
                     alert("couldn't upload image");
                 }
